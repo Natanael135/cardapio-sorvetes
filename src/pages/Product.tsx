@@ -20,7 +20,7 @@ export default function Product() {
         Voltar
       </Link>
 
-      <div className="bg-white rounded-2xl shadow-soft border overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-soft overflow-hidden">
         <div className="aspect-[4/3] bg-neutral-100">
           <img
             src={product.imageUrl}
