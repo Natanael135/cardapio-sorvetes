@@ -10,5 +10,5 @@ export interface Product {
   imageUrl: string;
   category: Category;
   description: string;
-  tags?: ("promo" | "novo")[];
+  tags?: ("Promo" | "Novo" | "Popular")[];
 }
