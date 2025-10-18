@@ -10,7 +10,7 @@ export default function Home() {
     <section className="space-y-4">
       <div className="rounded-2xl bg-gradient-to-r from-yellow-200 to-orange-200 p-6 text-center">
         <Flower className="h-12 w-12 text-yellow-600 mx-auto mb-2" />
-        <h2 className="text-xl font-bold text-orange-800 mb-1">Bem-vindo ao Sorvete da Fabiana!</h2>
+        <h2 className="text-xl font-bold text-orange-800 mb-1">Bem-vindo ao Geladinho Gourmet da Fabi!</h2>
         <p className="text-sm text-orange-700">Deliciosos sorvetes feitos com amor, como um campo de girassóis</p>
       </div>
 
