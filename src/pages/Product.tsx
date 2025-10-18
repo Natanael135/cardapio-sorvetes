@@ -21,7 +21,7 @@ export default function Product() {
       </Link>
 
       <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-soft overflow-hidden border border-yellow-200">
-        <div className="aspect-[4/3] bg-neutral-100">
+        <div className="aspect-[4/3] md:aspect-[1/1] md:max-w-sm mx-auto bg-neutral-100">
           <img
             src={product.imageUrl}
             alt={product.name}
