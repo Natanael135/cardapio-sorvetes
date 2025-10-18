@@ -15,12 +15,12 @@ export default function Product() {
 
   return (
     <div className="space-y-4">
-      <Link to="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800">
+      <Link to="/" className="inline-flex items-center gap-2 text-yellow-600 hover:text-yellow-800">
         <ArrowLeft className="h-4 w-4" />
         Voltar
       </Link>
 
-      <div className="bg-white rounded-2xl shadow-soft overflow-hidden">
+      <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-soft overflow-hidden border border-yellow-200">
         <div className="aspect-[4/3] bg-neutral-100">
           <img
             src={product.imageUrl}
@@ -37,7 +37,7 @@ export default function Product() {
           </div>
           <p className="text-gray-600">Categoria: {product.category}</p>
           <p className="text-gray-700">{product.description}</p>
-          <p className="text-3xl font-bold text-blue-600">
+          <p className="text-3xl font-bold text-primary">
             R$ {product.price.toFixed(2)}
           </p>
           <AddToCartModal product={product} />

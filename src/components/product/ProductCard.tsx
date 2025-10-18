@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-soft border hover:shadow-lg transition-shadow">
+    <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-50 to-orange-50 shadow-soft border border-yellow-200 hover:shadow-lg transition-shadow">
       <Link to={`/product/${product.id}`}>
         <div className="aspect-[4/3] bg-neutral-100">
           <img

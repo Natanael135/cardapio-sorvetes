@@ -281,7 +281,7 @@ export default function Cart() {
         <p className="text-gray-600">Que tal adicionar alguns sorvetes deliciosos?</p>
         <Link
           to="/"
-          className="inline-block bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="inline-block bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
         >
           Ver Sorvetes
         </Link>
@@ -308,7 +308,7 @@ export default function Cart() {
               />
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-800">{item.product.name}</h3>
-                <p className="text-blue-600 font-bold">R$ {item.product.price.toFixed(2)}</p>
+                <p className="text-primary font-bold">R$ {item.product.price.toFixed(2)}</p>
                 {item.notes && (
                   <p className="text-sm text-gray-600 mt-1">
                     <strong>Obs:</strong> {item.notes}
@@ -334,7 +334,7 @@ export default function Cart() {
                   <span className="w-8 text-center font-semibold">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                    className="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-colors"
+                    className="w-8 h-8 rounded-full bg-yellow-100 hover:bg-yellow-200 flex items-center justify-center transition-colors"
                   >
                     <Plus className="h-3 w-3" />
                   </button>
@@ -362,7 +362,7 @@ export default function Cart() {
           <select
             value={deliveryInfo.neighborhood}
             onChange={(e) => handleInputChange('neighborhood', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
           >
             <option value="">
               {!deliveryInfo.neighborhood ? 'Selecione o bairro' : 'Selecione o bairro'}
@@ -420,7 +420,7 @@ export default function Cart() {
       <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-lg text-gray-800 flex items-center gap-2">
-            <Truck className="h-5 w-5 text-blue-600" />
+            <Truck className="h-5 w-5 text-yellow-600" />
             Informações de Entrega
           </h3>
         </div>
@@ -436,7 +436,7 @@ export default function Cart() {
                 type="text"
                 value={deliveryInfo.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all ${
                   validationErrors.name ? 'border-red-300 bg-red-50' : 'border-gray-200'
                 }`}
                 placeholder="Digite seu nome completo"
@@ -458,7 +458,7 @@ export default function Cart() {
                 type="tel"
                 value={deliveryInfo.whatsapp}
                 onChange={(e) => handleInputChange('whatsapp', e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all ${
                   validationErrors.whatsapp ? 'border-red-300 bg-red-50' : 'border-gray-200'
                 }`}
                 placeholder="(11) 99999-9999"
@@ -479,7 +479,7 @@ export default function Cart() {
               <select
                 value={deliveryInfo.neighborhood}
                 onChange={(e) => handleInputChange('neighborhood', e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all ${
                   validationErrors.neighborhood ? 'border-red-300 bg-red-50' : 'border-gray-200'
                 }`}
               >
@@ -512,7 +512,7 @@ export default function Cart() {
                 type="text"
                 value={deliveryInfo.address}
                 onChange={(e) => handleInputChange('address', e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all ${
                   validationErrors.address ? 'border-red-300 bg-red-50' : 'border-gray-200'
                 }`}
                 placeholder="Rua, número, complemento"
@@ -530,7 +530,7 @@ export default function Cart() {
               <select
                 value={deliveryInfo.paymentMethod}
                 onChange={(e) => setDeliveryInfo(prev => ({ ...prev, paymentMethod: e.target.value as DeliveryInfo['paymentMethod'] }))}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all"
               >
                 <option value="pix">Pix</option>
                 <option value="cartao_credito">Cartão de Crédito</option>
@@ -547,7 +547,7 @@ export default function Cart() {
                   type="text"
                   value={deliveryInfo.changeAmount}
                   onChange={(e) => handleChangeAmountInput(e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${validationErrors.changeAmount ? 'border-red-300 bg-red-50' : 'border-gray-200'}`}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all ${validationErrors.changeAmount ? 'border-red-300 bg-red-50' : 'border-gray-200'}`}
                 />
                 {validationErrors.changeAmount && (
                   <p className="text-xs text-red-600 mt-1">⚠️ {validationErrors.changeAmount}</p>
@@ -564,7 +564,7 @@ export default function Cart() {
               <textarea
                 value={deliveryInfo.generalNotes}
                 onChange={(e) => handleInputChange('generalNotes', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all resize-none"
                 placeholder="Instruções especiais para entrega, preferências, etc."
                 rows={3}
               />

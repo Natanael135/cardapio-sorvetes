@@ -5,18 +5,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        border: "hsl(210 20% 90%)",
-        input: "hsl(210 20% 96%)",
-        ring: "hsl(340 82% 52%)",
-        background: "hsl(0 0% 100%)",
-        foreground: "hsl(222.2 47.4% 11.2%)",
+        border: "hsl(45 20% 90%)",
+        input: "hsl(45 20% 96%)",
+        ring: "hsl(25 100% 50%)",
+        background: "hsl(50 100% 98%)",
+        foreground: "hsl(25 10% 20%)",
         primary: {
-          DEFAULT: "#e11d48",
-          foreground: "#ffffff"
+          DEFAULT: "#FFD700",
+          foreground: "#8B4513"
+        },
+        secondary: {
+          DEFAULT: "#FFA500",
+          foreground: "#FFFFFF"
+        },
+        accent: {
+          DEFAULT: "#FF8C00",
+          foreground: "#FFFFFF"
         },
         muted: {
-          DEFAULT: "hsl(210 20% 98%)",
-          foreground: "hsl(215 16.3% 46.9%)"
+          DEFAULT: "hsl(45 20% 95%)",
+          foreground: "hsl(25 10% 40%)"
         }
       },
       borderRadius: {
@@ -24,7 +32,7 @@ module.exports = {
         "2xl": "1.25rem"
       },
       boxShadow: {
-        soft: "0 2px 16px rgba(0,0,0,0.06)"
+        soft: "0 2px 16px rgba(255,215,0,0.1)"
       }
     }
   },

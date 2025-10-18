@@ -53,16 +53,16 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
       {/* Modal de adicionar ao carrinho */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-xl text-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+          <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold py-4 px-6 rounded-xl text-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
             <ShoppingCart className="h-5 w-5" />
             Adicionar ao Carrinho
           </button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[480px] p-0 overflow-hidden">
-          <div className="bg-gradient-to-br from-blue-50 to-white">
+          <div className="bg-gradient-to-br from-yellow-50 to-orange-50">
             <DialogHeader className="p-6 pb-4">
               <DialogTitle className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                <ShoppingCart className="h-6 w-6 text-blue-600" />
+                <ShoppingCart className="h-6 w-6 text-yellow-600" />
                 Adicionar ao Carrinho
               </DialogTitle>
             </DialogHeader>
@@ -77,7 +77,7 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
                 />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 text-lg">{product.name}</h3>
-                  <p className="text-blue-600 font-bold text-xl">R$ {product.price.toFixed(2)}</p>
+                  <p className="text-primary font-bold text-xl">R$ {product.price.toFixed(2)}</p>
                 </div>
               </div>
 
@@ -96,9 +96,9 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
                   </div>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-12 h-12 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center transition-colors"
+                    className="w-12 h-12 rounded-full bg-yellow-100 hover:bg-yellow-200 flex items-center justify-center transition-colors"
                   >
-                    <Plus className="h-5 w-5 text-blue-600" />
+                    <Plus className="h-5 w-5 text-yellow-600" />
                   </button>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
               <div className="bg-white rounded-xl p-4 shadow-sm border">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold text-gray-700">Total:</span>
-                  <span className="text-2xl font-bold text-blue-600">
+                  <span className="text-2xl font-bold text-primary">
                     R$ {(product.price * quantity).toFixed(2)}
                   </span>
                 </div>
