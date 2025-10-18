@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Trash2, Plus, Minus, User, Phone, MapPin, Truck, MessageSquare } from "lucide-react";
+import { Trash2, Plus, Minus, User, Phone, MapPin, Truck, MessageSquare, Flower } from "lucide-react";
 import { z } from "zod";
 import { type Product } from "@/types";
 import { SHIPPING_RATES, type Neighborhood } from "@/data/shipping";
@@ -584,9 +584,9 @@ export default function Cart() {
         </Link>
         <button
           onClick={handleFinalizeOrder}
-          className="flex items-center justify-center gap-2 py-3 px-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="flex items-center justify-center gap-2 py-3 px-6 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
         >
-          <Truck className="h-5 w-5" />
+          <Flower className="h-5 w-5" />
           Finalizar Pedido
         </button>
       </div>

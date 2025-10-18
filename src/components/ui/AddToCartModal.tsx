@@ -1,6 +1,12 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Minus, Plus, ShoppingCart, CheckCircle } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Minus, Plus, ShoppingCart, CheckCircle, Flower } from "lucide-react";
 import { type Product } from "@/types";
 
 interface CartItem {
@@ -21,7 +27,9 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
 
   const handleAddToCart = () => {
     const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existingItemIndex = cart.findIndex(item => item.product.id === product.id);
+    const existingItemIndex = cart.findIndex(
+      (item) => item.product.id === product.id
+    );
 
     if (existingItemIndex >= 0) {
       cart[existingItemIndex].quantity += quantity;
@@ -54,7 +62,7 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold py-4 px-6 rounded-xl text-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-            <ShoppingCart className="h-5 w-5" />
+            <Flower className="h-5 w-5" />
             Adicionar ao Carrinho
           </button>
         </DialogTrigger>
@@ -62,7 +70,7 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
           <div className="bg-gradient-to-br from-yellow-50 to-orange-50">
             <DialogHeader className="p-6 pb-4">
               <DialogTitle className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                <ShoppingCart className="h-6 w-6 text-yellow-600" />
+                <Flower className="h-6 w-6 text-yellow-600" />
                 Adicionar ao Carrinho
               </DialogTitle>
             </DialogHeader>
@@ -76,14 +84,20 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
                   className="w-20 h-20 rounded-lg object-cover shadow-sm"
                 />
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800 text-lg">{product.name}</h3>
-                  <p className="text-primary font-bold text-xl">R$ {product.price.toFixed(2)}</p>
+                  <h3 className="font-semibold text-gray-800 text-lg">
+                    {product.name}
+                  </h3>
+                  <p className="text-primary font-bold text-xl">
+                    R$ {product.price.toFixed(2)}
+                  </p>
                 </div>
               </div>
 
               {/* Quantidade */}
               <div className="space-y-3">
-                <label className="text-sm font-semibold text-gray-700">Quantidade</label>
+                <label className="text-sm font-semibold text-gray-700">
+                  Quantidade
+                </label>
                 <div className="flex items-center justify-center space-x-4">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -92,7 +106,9 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
                     <Minus className="h-5 w-5 text-gray-600" />
                   </button>
                   <div className="bg-white border-2 border-gray-200 rounded-lg px-6 py-3 min-w-[80px] text-center">
-                    <span className="text-xl font-bold text-gray-800">{quantity}</span>
+                    <span className="text-xl font-bold text-gray-800">
+                      {quantity}
+                    </span>
                   </div>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
@@ -105,7 +121,9 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
 
               {/* Observações */}
               <div className="space-y-3">
-                <label className="text-sm font-semibold text-gray-700">Observações (opcional)</label>
+                <label className="text-sm font-semibold text-gray-700">
+                  Observações (opcional)
+                </label>
                 <textarea
                   placeholder="Ex: Sem lactose, menos açúcar, mais calda..."
                   value={notes}
@@ -118,7 +136,9 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
               {/* Total e botão */}
               <div className="bg-white rounded-xl p-4 shadow-sm border">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-semibold text-gray-700">Total:</span>
+                  <span className="text-lg font-semibold text-gray-700">
+                    Total:
+                  </span>
                   <span className="text-2xl font-bold text-primary">
                     R$ {(product.price * quantity).toFixed(2)}
                   </span>
@@ -141,8 +161,8 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
         <DialogContent className="sm:max-w-[400px] p-0 overflow-hidden">
           <div className="bg-gradient-to-br from-green-50 to-white text-center">
             <DialogHeader className="p-6 pb-4">
-              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle className="h-8 w-8 text-green-600" />
+              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 gap-1">
+                <Flower className="h-15 w-15 text-yellow-600" />
               </div>
               <DialogTitle className="text-xl font-bold text-gray-800">
                 Produto Adicionado! 🎉
@@ -151,7 +171,8 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
 
             <div className="px-6 pb-6">
               <p className="text-gray-600 mb-6">
-                <strong>{product.name}</strong> foi adicionado ao seu carrinho com sucesso!
+                <strong>{product.name}</strong> foi adicionado ao seu carrinho
+                com sucesso!
               </p>
 
               <div className="flex gap-3">
@@ -163,7 +184,7 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
                 </button>
                 <button
                   onClick={handleCheckout}
-                  className="flex-1 py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+                  className="flex-1 py-3 px-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
                 >
                   Ir para o Carrinho
                 </button>
