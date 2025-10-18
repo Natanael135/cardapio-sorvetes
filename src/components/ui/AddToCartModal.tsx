@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +21,7 @@ interface AddToCartModalProps {
 }
 
 export default function AddToCartModal({ product }: AddToCartModalProps) {
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +50,7 @@ export default function AddToCartModal({ product }: AddToCartModalProps) {
 
   const handleContinueShopping = () => {
     setShowConfirmation(false);
+    navigate("/");
   };
 
   const handleCheckout = () => {
