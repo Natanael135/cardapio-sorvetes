@@ -4,7 +4,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "1",
     name: "Geladinho de Ninho com Nutella",
-    price: 12.9,
+    price: 3.99,
     imageUrl:
       "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "TRADICIONAIS",
@@ -15,7 +15,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "2",
     name: "Geladinho Sensação",
-    price: 13.9,
+    price: 3.99,
     imageUrl:
       "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "TRADICIONAIS",
@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "3",
     name: "Geladinho de Coco",
-    price: 11.9,
+    price: 3.99,
     imageUrl:
       "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "TRADICIONAIS",
@@ -37,7 +37,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "4",
     name: "Geladinho de Maraucuja",
-    price: 15.9,
+    price: 3.99,
     imageUrl:
       "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "PREMIUM",
@@ -47,7 +47,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "5",
     name: "Geladinho de Doce de Leite com Paçoquita",
-    price: 14.9,
+    price: 3.99,
     imageUrl:
       "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "PREMIUM",
