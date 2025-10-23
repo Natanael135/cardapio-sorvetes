@@ -1,12 +1,14 @@
 import { PRODUCTS } from "@/data/products";
 import ProductCard from "./ProductCard";
+import { ProductCardSkeleton } from "./ProductCardSkeleton";
 
 interface ProductGridProps {
   searchTerm?: string;
   category?: string;
+  isLoading?: boolean;
 }
 
-export default function ProductGrid({ searchTerm = "", category = "" }: ProductGridProps) {
+export default function ProductGrid({ searchTerm = "", category = "", isLoading = false }: ProductGridProps) {
   // Filtrar produtos baseado na pesquisa e categoria
   const filteredProducts = PRODUCTS.filter((product) => {
     const matchesSearch = searchTerm === "" ||
@@ -21,13 +23,22 @@ export default function ProductGrid({ searchTerm = "", category = "" }: ProductG
 
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-      {filteredProducts.map((p) => (
-        <ProductCard key={p.id} product={p} />
-      ))}
-      {filteredProducts.length === 0 && (
-        <div className="col-span-full text-center py-8 text-gray-500">
-          Nenhum produto encontrado
-        </div>
+      {isLoading ? (
+        // Renderizar skeletons enquanto carrega
+        Array.from({ length: 8 }).map((_, index) => (
+          <ProductCardSkeleton key={`skeleton-${index}`} />
+        ))
+      ) : (
+        <>
+          {filteredProducts.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+          {filteredProducts.length === 0 && (
+            <div className="col-span-full text-center py-8 text-gray-500">
+              Nenhum produto encontrado
+            </div>
+          )}
+        </>
       )}
     </div>
   );
