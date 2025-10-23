@@ -3,55 +3,55 @@ import { type Product } from "@/types";
 export const PRODUCTS: Product[] = [
   {
     id: "1",
-    name: "Sorvete de Chocolate",
+    name: "Geladinho de Ninho com Nutella",
     price: 12.9,
     imageUrl:
-      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "TRADICIONAIS",
     description:
-      "Delicioso sorvete cremoso de chocolate belga, feito com cacau premium e leite fresco.",
+      "Delicioso geladinho cremoso de leite ninho com nutella, combinação perfeita de chocolate e avelã.",
     tags: ["Novo"],
   },
   {
     id: "2",
-    name: "Sorvete de Morango",
+    name: "Geladinho Sensação",
     price: 13.9,
     imageUrl:
-      "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "TRADICIONAIS",
     description:
-      "Sorvete suave de morango natural, com pedaços reais de frutas frescas e suculentas.",
+      "Geladinho sensação com camadas de chocolate e baunilha, uma explosão de sabores clássicos.",
     tags: ["Promo"],
   },
   {
     id: "3",
-    name: "Sorvete de Baunilha",
+    name: "Geladinho de Coco",
     price: 11.9,
     imageUrl:
-      "https://images.unsplash.com/photo-1570197788417-0e82375c9371?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "TRADICIONAIS",
     description:
-      "Clássico sorvete de baunilha Bourbon Madagascar, cremoso e aromático.",
+      "Geladinho refrescante de coco, feito com leite de coco natural e raspas crocantes.",
     tags: ["Popular"],
   },
   {
     id: "4",
-    name: "Sorvete de Pistache",
+    name: "Geladinho de Maraucuja",
     price: 15.9,
     imageUrl:
-      "https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "PREMIUM",
     description:
-      "Sorvete premium de pistache italiano, com nozes crocantes e sabor intenso.",
+      "Geladinho tropical de maracujá, com polpa fresca e um toque cítrico irresistível.",
   },
   {
     id: "5",
-    name: "Sorvete de Caramelo",
+    name: "Geladinho de Doce de Leite com Paçoquita",
     price: 14.9,
     imageUrl:
-      "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1761240135088-1bd4efa45848?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
     category: "PREMIUM",
     description:
-      "Irresistível sorvete de caramelo salgado, com pedaços de caramelo crocante.",
+      "Geladinho cremoso de doce de leite com paçoquita, combinação perfeita e indulgente.",
   },
 ];
