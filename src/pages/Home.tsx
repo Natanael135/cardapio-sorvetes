@@ -7,22 +7,22 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   return (
-    <section className="space-y-4">
-      <div className="rounded-2xl bg-gradient-to-r from-yellow-200 to-orange-200 p-6 text-center">
-        <Flower className="h-12 w-12 text-yellow-600 mx-auto mb-2" />
-        <h2 className="text-xl font-bold text-orange-800 mb-1">Bem-vindo ao Geladinho Gourmet da Fabi!</h2>
-        <p className="text-sm text-orange-700">Deliciosos sorvetes feitos com amor, como um campo de girassóis</p>
+    <section className="space-y-6">
+      <div className="rounded-2xl bg-gradient-to-r from-yellow-200 via-orange-200 to-yellow-300 p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <Flower className="h-16 w-16 text-yellow-600 mx-auto mb-4 animate-pulse" />
+        <h2 className="text-2xl font-bold text-orange-800 mb-2">Bem-vindo ao Geladinho Gourmet da Faby!</h2>
+        <p className="text-base text-orange-700 font-medium">Deliciosos Geladinhos feitos com Amor, Alegria e Gratidão, como um campo de girassóis</p>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-row flex-wrap items-center gap-3">
         <input
-          className="w-full rounded-full border border-yellow-300 bg-yellow-50 px-4 py-2 text-sm placeholder:text-orange-400 focus:ring-2 focus:ring-yellow-400"
+          className="min-w-0 flex-1 rounded-full border-2 border-yellow-300 bg-yellow-50 px-4 py-3 text-base placeholder:text-orange-400 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-200 hover:shadow-md"
           placeholder="Buscar doces, sabores..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <select
-          className="rounded-full border border-yellow-300 bg-yellow-50 px-3 py-2 text-sm focus:ring-2 focus:ring-yellow-400"
+          className="rounded-full border-2 border-yellow-300 bg-yellow-50 px-3 py-3 text-base focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-all duration-200 hover:shadow-md min-w-[120px] md:min-w-[180px]"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >

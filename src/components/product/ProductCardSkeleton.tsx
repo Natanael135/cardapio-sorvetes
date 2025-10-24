@@ -22,22 +22,24 @@ export function ProductCardSkeleton() {
         </div>
       </div>
 
-      <div className="p-3 space-y-2">
-        {/* Header com título e badge */}
-        <div className="flex items-center justify-between">
+      <div className="p-4 space-y-3">
+        {/* Header com título */}
+        <div className="min-h-[3rem]">
           <Skeleton variant="text" className="h-5 w-3/4" />
-          <Skeleton variant="rounded" className="h-5 w-16" />
         </div>
 
         {/* Descrição */}
-        <div className="space-y-1">
+        <div className="space-y-1 min-h-[2.5rem]">
           <Skeleton variant="text" className="h-3 w-full" />
           <Skeleton variant="text" className="h-3 w-5/6" />
         </div>
 
-        {/* Preço */}
-        <div className="flex items-center justify-between">
-          <Skeleton variant="text" className="h-6 w-20" />
+        {/* Preço e botão */}
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <Skeleton variant="text" className="h-6 w-20" />
+          </div>
+          <Skeleton variant="rounded" className="h-9 w-full" />
         </div>
       </div>
 
