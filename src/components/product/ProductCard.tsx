@@ -16,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
           />
           {product.tags && product.tags.length > 0 && (
             <div className="absolute top-3 -left-1">
-              <Badge className="bg-orange-600 text-white border-2 border-white shadow-md -rotate-45">
+              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-2 border-white shadow-md -rotate-45">
                 {product.tags[0]}
               </Badge>
             </div>
