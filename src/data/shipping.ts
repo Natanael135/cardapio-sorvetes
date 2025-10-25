@@ -1,4 +1,5 @@
 export const SHIPPING_RATES = {
+  "Retirada na loja": 0,
   "Alto da Brasília": 5,
   "Alto da Expectativa": 5,
   "Alto do Cristo": 6,
