@@ -228,7 +228,7 @@ export default function Cart() {
   };
 
   const generateOrderMessage = () => {
-    let message = `🍦 *NOVO PEDIDO DE SORVETE* 🍦\n\n`;
+    let message = `🍦 *NOVO PEDIDO DE GELADINHO GOURMET* 🍦\n\n`;
     message += `*👤 Cliente:* ${deliveryInfo.name}\n`;
     message += `*📱 WhatsApp:* ${deliveryInfo.whatsapp}\n`;
     message += `*📍 Endereço:* ${deliveryInfo.address}, ${deliveryInfo.neighborhood}\n`;
