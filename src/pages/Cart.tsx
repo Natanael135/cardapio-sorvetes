@@ -209,7 +209,7 @@ export default function Cart() {
 
       // Aqui você pode enviar os dados para um backend ou WhatsApp
       const orderMessage = generateOrderMessage();
-      const whatsappUrl = `https://wa.me/5588996559305?text=${encodeURIComponent(orderMessage)}`;
+      const whatsappUrl = `https://wa.me/5588981259978?text=${encodeURIComponent(orderMessage)}`;
       window.open(whatsappUrl, '_blank');
 
       // Limpar carrinho após pedido
