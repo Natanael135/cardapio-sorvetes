@@ -279,7 +279,7 @@ export default function Cart() {
         <div className="max-w-md mx-auto text-center space-y-6">
           <div className="text-6xl animate-bounce">🛒</div>
           <h2 className="text-2xl font-bold text-gray-800">Seu carrinho está vazio</h2>
-          <p className="text-gray-600">Que tal adicionar alguns sorvetes deliciosos?</p>
+          <p className="text-gray-600">Que tal adicionar alguns Geladinhos deliciosos?</p>
           <Link
             to="/"
             className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-2xl transition-all duration-300 shadow-soft hover:shadow-lg"
