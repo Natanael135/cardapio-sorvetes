@@ -50,7 +50,7 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-xs text-gray-500">
-              © 2025 Geladinho Gourmet da Fabi. Todos os direitos reservados.
+              © 2025 Geladinho Gourmet da Faby. Todos os direitos reservados.
             </p>
           </div>
         </div>
