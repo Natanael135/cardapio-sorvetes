@@ -256,7 +256,7 @@ export default function Cart() {
     });
 
     const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-    const frete = deliveryInfo.neighborhood ? SHIPPING_RATES[deliveryInfo.neighborhood as Neighborhood] || 10.00 : 0;
+    const frete = deliveryInfo.neighborhood ? SHIPPING_RATES[deliveryInfo.neighborhood as Neighborhood] : 0;
     const total = subtotal + frete;
 
     message += `*💰 RESUMO DO PEDIDO:*\n`;
@@ -270,7 +270,7 @@ export default function Cart() {
   };
 
   const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-  const frete = deliveryInfo.neighborhood ? SHIPPING_RATES[deliveryInfo.neighborhood as Neighborhood] || 10.00 : 0;
+  const frete = deliveryInfo.neighborhood ? SHIPPING_RATES[deliveryInfo.neighborhood as Neighborhood] : 0;
   const total = subtotal + frete;
 
   if (cart.length === 0) {
