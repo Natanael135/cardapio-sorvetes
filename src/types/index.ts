@@ -4,11 +4,12 @@ export type Category =
   | "OUTROS";
 
 export interface Product {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   imageUrl: string;
   category: Category;
   description: string;
-  tags?: ("Promo" | "Novo" | "Popular")[];
+  tags?: string[];
+  available: boolean;
 }

@@ -1,16 +1,20 @@
 import { PRODUCTS } from "@/data/products";
 import ProductCard from "./ProductCard";
 import { ProductCardSkeleton } from "./ProductCardSkeleton";
+import { type Product } from "@/api";
 
 interface ProductGridProps {
   searchTerm?: string;
   category?: string;
+  products?: Product[];
   isLoading?: boolean;
 }
 
-export default function ProductGrid({ searchTerm = "", category = "", isLoading = false }: ProductGridProps) {
+export default function ProductGrid({ searchTerm = "", category = "", products, isLoading = false }: ProductGridProps) {
+  const productList = products || PRODUCTS;
+
   // Filtrar produtos baseado na pesquisa e categoria
-  const filteredProducts = PRODUCTS.filter((product) => {
+  const filteredProducts = productList.filter((product) => {
     const matchesSearch = searchTerm === "" ||
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
