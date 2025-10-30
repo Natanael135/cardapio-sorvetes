@@ -47,18 +47,29 @@ export default function ProductCard({ product }: { product: Product }) {
                 <span className="text-lg font-bold text-orange-600">
                   R$ {product.price.toFixed(2)}
                 </span>
+                {!product.available && (
+                  <span className="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700">
+                    Indisponível
+                  </span>
+                )}
               </div>
               <Button
                 size="sm"
-                className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white border-0 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]"
+                disabled={!product.available}
+                className={`w-full border-0 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] ${
+                  product.available
+                    ? "bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white"
+                    : "bg-gray-400 text-gray-200 cursor-not-allowed"
+                }`}
                 onClick={(e) => {
+                  if (!product.available) return;
                   e.preventDefault();
                   e.stopPropagation();
                   setShowModal(true);
                 }}
               >
                 <Plus className="h-4 w-4 mr-1" />
-                Adicionar
+                {product.available ? "Adicionar" : "Indisponível"}
               </Button>
             </div>
           </div>

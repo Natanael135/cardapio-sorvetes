@@ -102,9 +102,16 @@ export default function ProductPage() {
               </p>
 
               <div className="pt-4">
-                <p className="text-xl md:text-3xl lg:text-4xl font-bold text-orange-600 mb-4 md:mb-6">
-                  R$ {product.price.toFixed(2)}
-                </p>
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-xl md:text-3xl lg:text-4xl font-bold text-orange-600">
+                    R$ {product.price.toFixed(2)}
+                  </p>
+                  {!product.available && (
+                    <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
+                      Indisponível
+                    </span>
+                  )}
+                </div>
                 <AddToCartModal product={product} />
               </div>
             </div>

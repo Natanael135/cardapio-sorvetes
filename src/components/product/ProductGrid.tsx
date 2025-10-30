@@ -14,16 +14,23 @@ export default function ProductGrid({ searchTerm = "", category = "", products, 
   const productList = products || PRODUCTS;
 
   // Filtrar produtos baseado na pesquisa e categoria
-  const filteredProducts = productList.filter((product) => {
-    const matchesSearch = searchTerm === "" ||
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredProducts = productList
+    .filter((product) => {
+      const matchesSearch = searchTerm === "" ||
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    const matchesCategory = category === "" || product.category === category;
+      const matchesCategory = category === "" || product.category === category;
 
-    return matchesSearch && matchesCategory;
-  });
+      return matchesSearch && matchesCategory;
+    })
+    // Ordenar: disponíveis primeiro, indisponíveis por último
+    .sort((a, b) => {
+      if (a.available && !b.available) return -1; // a disponível, b indisponível -> a vem primeiro
+      if (!a.available && b.available) return 1;  // a indisponível, b disponível -> b vem primeiro
+      return 0; // ambos têm o mesmo status de disponibilidade
+    });
 
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">

@@ -34,6 +34,12 @@ export default function AddToCartModal({ product, isOpen: externalIsOpen, onOpen
   const setIsOpen = externalOnOpenChange || setInternalIsOpen;
 
   const handleAddToCart = () => {
+    // Verificar se o produto está disponível
+    if (!product.available) {
+      alert('Este produto não está disponível no momento.');
+      return;
+    }
+
     const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
     const existingItemIndex = cart.findIndex(
       (item) => item.product._id === product._id
@@ -162,10 +168,15 @@ export default function AddToCartModal({ product, isOpen: externalIsOpen, onOpen
                 </div>
                 <button
                   onClick={handleAddToCart}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
+                  disabled={!product.available}
+                  className={`w-full font-semibold py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2 ${
+                    product.available
+                      ? "bg-orange-500 hover:bg-orange-600 text-white"
+                      : "bg-gray-400 text-gray-200 cursor-not-allowed"
+                  }`}
                 >
                   <CheckCircle className="h-4 w-4" />
-                  Adicionar ao Carrinho
+                  {product.available ? "Adicionar ao Carrinho" : "Produto Indisponível"}
                 </button>
               </div>
             </div>
