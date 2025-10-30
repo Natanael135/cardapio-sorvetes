@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { type Product, type Category } from '@/types';
-import { fetchProducts } from '@/api';
+import { fetchProducts, API_BASE_URL } from '@/api';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
 export default function Admin() {
@@ -37,7 +37,7 @@ export default function Admin() {
   const handleDelete = async (id: string) => {
     if (!confirm('Tem certeza que deseja deletar este produto?')) return;
     try {
-      const response = await fetch(`http://localhost:3000/products/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/products/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -51,7 +51,7 @@ export default function Admin() {
   const handleSave = async (product: Partial<Product>) => {
     try {
       const method = editingProduct ? 'PATCH' : 'POST';
-      const url = editingProduct ? `http://localhost:3000/products/${editingProduct._id}` : 'http://localhost:3000/products';
+      const url = editingProduct ? `${API_BASE_URL}/products/${editingProduct._id}` : `${API_BASE_URL}/products`;
       const response = await fetch(url, {
         method,
         headers: {

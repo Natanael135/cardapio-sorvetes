@@ -1,6 +1,6 @@
 import { type Product } from "@/types";
 
-const API_BASE_URL = 'http://localhost:3000'; // Ajuste para produção
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'; // Fallback para desenvolvimento
 
 export { API_BASE_URL };
 

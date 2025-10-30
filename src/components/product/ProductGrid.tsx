@@ -35,7 +35,7 @@ export default function ProductGrid({ searchTerm = "", category = "", products, 
       ) : (
         <>
           {filteredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <ProductCard key={p._id} product={p} />
           ))}
           {filteredProducts.length === 0 && (
             <div className="col-span-full text-center py-8 text-gray-500">

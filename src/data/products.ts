@@ -2,7 +2,7 @@ import { type Product } from "@/types";
 
 export const PRODUCTS: Product[] = [
   {
-    id: "1",
+    _id: "1",
     name: "Geladinho de Ninho com Nutella",
     price: 4.99,
     imageUrl:
@@ -14,7 +14,7 @@ export const PRODUCTS: Product[] = [
     available: true,
   },
   {
-    id: "2",
+    _id: "2",
     name: "Geladinho Morango com Chocolate",
     price: 3.99,
     imageUrl:
@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
     available: true,
   },
   {
-    id: "3",
+    _id: "3",
     name: "Geladinho de Coco com Ninho",
     price: 3.99,
     imageUrl:
@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     available: true,
   },
   {
-    id: "4",
+    _id: "4",
     name: "Geladinho de Maracujá Com Ninho",
     price: 3.99,
     imageUrl:
@@ -50,7 +50,7 @@ export const PRODUCTS: Product[] = [
     available: true,
   },
   {
-    id: "5",
+    _id: "5",
     name: "Geladinho de Maracujá com Chocolate",
     price: 4.49,
     imageUrl:
@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
     available: true,
   },
   {
-    id: "6",
+    _id: "6",
     name: "Geladinho de Morango com Ninho",
     price: 4.99,
     imageUrl:
@@ -74,7 +74,7 @@ export const PRODUCTS: Product[] = [
     available: true,
   },
   {
-    id: "7",
+    _id: "7",
     name: "Geladinho de Coco com Chocolate",
     price: 4.99,
     imageUrl:
