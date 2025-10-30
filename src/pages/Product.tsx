@@ -1,13 +1,48 @@
 import { useParams } from "react-router-dom";
-import { PRODUCTS } from "@/data/products";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Flower } from "lucide-react";
 import { Link } from "react-router-dom";
 import AddToCartModal from "@/components/ui/AddToCartModal";
+import { fetchProduct, type Product, API_BASE_URL } from "@/api";
 
-export default function Product() {
+export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
-  const product = PRODUCTS.find((p) => p.id === id);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProduct = async () => {
+      if (!id) return;
+      try {
+        // Se id for ObjectId (_id), buscar por _id, senão por id
+        const isObjectId = id.length === 24 && /^[a-f\d]+$/i.test(id);
+        const url = isObjectId ? `${API_BASE_URL}/products/${id}` : `${API_BASE_URL}/products/${id}`;
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch product');
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadProduct();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-3">
+          <Flower className="h-12 w-12 text-yellow-600 mx-auto animate-pulse" />
+          <p className="text-orange-700">Carregando produto...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (

@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <>
       <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-50 to-orange-50 shadow-soft border border-yellow-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out">
-        <Link to={`/product/${product.id}`} className="block group">
+        <Link to={`/product/${product._id}`} className="block group">
           <div className="aspect-[4/3] bg-neutral-100 relative overflow-hidden">
             <img
               src={product.imageUrl}

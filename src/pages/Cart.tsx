@@ -123,7 +123,7 @@ export default function Cart() {
     }
 
     const updatedCart = cart.map(item =>
-      item.product.id === productId
+      item.product._id === productId
         ? { ...item, quantity: newQuantity }
         : item
     );
@@ -132,7 +132,7 @@ export default function Cart() {
   };
 
   const removeItem = (productId: string) => {
-    const updatedCart = cart.filter(item => item.product.id !== productId);
+    const updatedCart = cart.filter(item => item.product._id !== productId);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
@@ -303,7 +303,7 @@ export default function Cart() {
         {/* Itens do carrinho */}
         <div className="space-y-4">
           {cart.map((item, index) => (
-            <div key={item.product.id} className="bg-white rounded-2xl shadow-soft border border-yellow-200 p-4 hover:shadow-lg transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+            <div key={item.product._id} className="bg-white rounded-2xl shadow-soft border border-yellow-200 p-4 hover:shadow-lg transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
               <div className="flex gap-4">
                 <img
                   src={item.product.imageUrl}
@@ -321,7 +321,7 @@ export default function Cart() {
                 </div>
                 <div className="flex flex-col items-end gap-3">
                   <button
-                    onClick={() => removeItem(item.product.id)}
+                    onClick={() => removeItem(item.product._id)}
                     className="p-2 text-red-400 hover:bg-red-50 rounded-lg transition-all duration-200 hover:scale-110"
                     title="Remover item"
                   >
@@ -331,7 +331,7 @@ export default function Cart() {
                   {/* Controles de quantidade */}
                   <div className="flex items-center gap-2 bg-gray-50 rounded-full p-1 shadow-sm">
                     <button
-                      onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                      onClick={() => updateQuantity(item.product._id, item.quantity - 1)}
                       className="w-8 h-8 rounded-full bg-white hover:bg-gray-100 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
                       disabled={item.quantity <= 1}
                     >
@@ -339,7 +339,7 @@ export default function Cart() {
                     </button>
                     <span className="w-8 text-center font-semibold text-gray-800">{item.quantity}</span>
                     <button
-                      onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
                       className="w-8 h-8 rounded-full bg-yellow-100 hover:bg-yellow-200 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
                     >
                       <Plus className="h-3 w-3" />

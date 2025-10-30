@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductGrid from "@/components/product/ProductGrid";
 import { Flower } from "lucide-react";
+import { fetchProducts, type Product } from "@/api";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   return (
     <section className="space-y-6">
@@ -32,7 +49,7 @@ export default function Home() {
         </select>
       </div>
 
-      <ProductGrid searchTerm={searchTerm} category={selectedCategory} />
+      <ProductGrid searchTerm={searchTerm} category={selectedCategory} products={products} isLoading={isLoading} />
     </section>
   );
 }

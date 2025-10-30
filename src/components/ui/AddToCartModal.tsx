@@ -36,7 +36,7 @@ export default function AddToCartModal({ product, isOpen: externalIsOpen, onOpen
   const handleAddToCart = () => {
     const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
     const existingItemIndex = cart.findIndex(
-      (item) => item.product.id === product.id
+      (item) => item.product._id === product._id
     );
 
     if (existingItemIndex >= 0) {
