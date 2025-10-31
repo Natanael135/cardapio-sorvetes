@@ -13,3 +13,9 @@ export interface Product {
   tags?: string[];
   available: boolean;
 }
+
+export interface Shipping {
+  _id: string;
+  neighborhood: string;
+  rate: number;
+}

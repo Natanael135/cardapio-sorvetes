@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Trash2, Plus, Minus, User, Phone, MapPin, Truck, MessageSquare, Flower } from "lucide-react";
 import { z } from "zod";
 import { type Product } from "@/types";
-import { SHIPPING_RATES, type Neighborhood } from "@/data/shipping";
+import { fetchShippingRates } from "@/api";
 
 interface CartItem {
   product: Product;
@@ -48,10 +48,12 @@ const deliverySchemaRefined = deliverySchema.superRefine((data, ctx) => {
   }
 });
 
-const NEIGHBORHOODS = Object.keys(SHIPPING_RATES) as Neighborhood[];
+const NEIGHBORHOODS = [] as string[]; // Será preenchido dinamicamente
 
 export default function Cart() {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [shippingRates, setShippingRates] = useState<Record<string, number>>({});
+  const [neighborhoods, setNeighborhoods] = useState<string[]>([]);
   const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo>({
     name: "",
     whatsapp: "",
@@ -62,6 +64,23 @@ export default function Cart() {
     changeAmount: '0,00',
   });
   const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof DeliveryInfo, string>>>({});
+
+  useEffect(() => {
+    const loadShippingRates = async () => {
+      try {
+        const shippingData = await fetchShippingRates();
+        const rates = shippingData.reduce((acc, rate) => ({
+          ...acc,
+          [rate.neighborhood]: rate.rate
+        }), {} as Record<string, number>);
+        setShippingRates(rates);
+        setNeighborhoods(Object.keys(rates));
+      } catch (error) {
+        console.error('Failed to load shipping rates:', error);
+      }
+    };
+    loadShippingRates();
+  }, []);
 
   // Formatação automática do WhatsApp
   const formatWhatsapp = (value: string) => {
@@ -256,7 +275,7 @@ export default function Cart() {
     });
 
     const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-    const frete = deliveryInfo.neighborhood ? SHIPPING_RATES[deliveryInfo.neighborhood as Neighborhood] : 0;
+    const frete = deliveryInfo.neighborhood ? shippingRates[deliveryInfo.neighborhood] || 0 : 0;
     const total = subtotal + frete;
 
     message += `*💰 RESUMO DO PEDIDO:*\n`;
@@ -270,7 +289,7 @@ export default function Cart() {
   };
 
   const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-  const frete = deliveryInfo.neighborhood ? SHIPPING_RATES[deliveryInfo.neighborhood as Neighborhood] : 0;
+  const frete = deliveryInfo.neighborhood ? shippingRates[deliveryInfo.neighborhood] || 0 : 0;
   const total = subtotal + frete;
 
   if (cart.length === 0) {
@@ -379,11 +398,11 @@ export default function Cart() {
               <option value="">
                 {!deliveryInfo.neighborhood ? 'Selecione o bairro' : 'Selecione o bairro'}
               </option>
-              {NEIGHBORHOODS.map((neighborhood) => {
-                const rate = SHIPPING_RATES[neighborhood];
+              {neighborhoods.map((neighborhood) => {
+                const rate = shippingRates[neighborhood];
                 return (
                   <option key={neighborhood} value={neighborhood}>
-                    {neighborhood} - R$ {rate.toFixed(2)}
+                    {neighborhood} - R$ {rate?.toFixed(2) || '0.00'}
                   </option>
                 );
               })}
@@ -507,11 +526,11 @@ export default function Cart() {
                 <option value="">
                   {validationErrors.neighborhood ? '⚠️ Selecione seu bairro' : 'Selecione o bairro'}
                 </option>
-                {NEIGHBORHOODS.map((neighborhood) => {
-                  const rate = SHIPPING_RATES[neighborhood];
+                {neighborhoods.map((neighborhood) => {
+                  const rate = shippingRates[neighborhood];
                   return (
                     <option key={neighborhood} value={neighborhood}>
-                      {neighborhood} - R$ {rate.toFixed(2)}
+                      {neighborhood} - R$ {rate?.toFixed(2) || '0.00'}
                     </option>
                   );
                 })}

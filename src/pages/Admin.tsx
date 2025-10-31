@@ -10,17 +10,20 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { type Product, type Category } from "@/types";
-import { fetchProducts, API_BASE_URL } from "@/api";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { type Product, type Category, type Shipping } from "@/types";
+import { fetchProducts, fetchShippingRates, createShippingRate, updateShippingRate, deleteShippingRate, API_BASE_URL } from "@/api";
+import { Plus, Edit, Trash2, Truck } from "lucide-react";
 
 export default function Admin() {
   const { isAuthenticated, token, logout } = useAuth();
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
+  const [shippingRates, setShippingRates] = useState<Shipping[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingShipping, setEditingShipping] = useState<Shipping | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isShippingDialogOpen, setIsShippingDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -28,6 +31,7 @@ export default function Admin() {
       return;
     }
     loadProducts();
+    loadShippingRates();
   }, [isAuthenticated, navigate]);
 
   const loadProducts = async () => {
@@ -38,6 +42,15 @@ export default function Admin() {
       console.error("Error fetching products:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const loadShippingRates = async () => {
+    try {
+      const data = await fetchShippingRates();
+      setShippingRates(data);
+    } catch (error) {
+      console.error("Error fetching shipping rates:", error);
     }
   };
 
@@ -75,6 +88,31 @@ export default function Admin() {
       setEditingProduct(null);
     } catch (error) {
       console.error("Error saving product:", error);
+    }
+  };
+
+  const handleDeleteShipping = async (id: string) => {
+    if (!confirm("Tem certeza que deseja deletar esta taxa de frete?")) return;
+    try {
+      await deleteShippingRate(id, token);
+      setShippingRates(shippingRates.filter((s) => s._id !== id));
+    } catch (error) {
+      console.error("Error deleting shipping rate:", error);
+    }
+  };
+
+  const handleSaveShipping = async (shipping: Partial<Shipping>) => {
+    try {
+      if (editingShipping) {
+        await updateShippingRate(editingShipping._id, shipping, token);
+      } else {
+        await createShippingRate(shipping, token);
+      }
+      await loadShippingRates();
+      setIsShippingDialogOpen(false);
+      setEditingShipping(null);
+    } catch (error) {
+      console.error("Error saving shipping rate:", error);
     }
   };
 
@@ -270,6 +308,94 @@ export default function Admin() {
             </div>
           </>
         )}
+
+        {/* Shipping Rates Section */}
+        <div className="mt-12">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+              Taxas de Frete
+            </h2>
+            <Dialog open={isShippingDialogOpen} onOpenChange={setIsShippingDialogOpen}>
+              <DialogTrigger asChild>
+                <Button
+                  onClick={() => setEditingShipping(null)}
+                  className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white w-full sm:w-auto"
+                >
+                  <Truck className="w-4 h-4 mr-2" />
+                  Nova Taxa
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-[90vw] sm:max-w-md w-full">
+                <DialogTitle className="text-lg sm:text-xl">
+                  {editingShipping ? "Editar Taxa" : "Nova Taxa"}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Configure a taxa de frete para um bairro.
+                </DialogDescription>
+                <ShippingForm
+                  shipping={editingShipping}
+                  onSave={handleSaveShipping}
+                  onCancel={() => setIsShippingDialogOpen(false)}
+                />
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-soft border border-yellow-200 overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-yellow-100">
+                <tr>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Bairro
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Taxa (R$)
+                  </th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Ações
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {shippingRates.map((shipping) => (
+                  <tr key={shipping._id}>
+                    <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {shipping.neighborhood}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      R$ {shipping.rate.toFixed(2)}
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                      <Button
+                        size="sm"
+                        className="bg-blue-500 hover:bg-blue-600 text-white"
+                        onClick={() => {
+                          setEditingShipping(shipping);
+                          setIsShippingDialogOpen(true);
+                        }}
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-red-500 border-red-500 hover:bg-red-50"
+                        onClick={() => handleDeleteShipping(shipping._id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {shippingRates.length === 0 && (
+              <div className="text-center py-8 text-gray-500">
+                Nenhuma taxa de frete cadastrada
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -469,6 +595,120 @@ function ProductForm({
           className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-medium w-full sm:w-auto"
         >
           {product ? "Atualizar Produto" : "Criar Produto"}
+        </Button>
+      </div>
+    </form>
+  );
+}
+
+function ShippingForm({
+  shipping,
+  onSave,
+  onCancel,
+}: {
+  shipping: Shipping | null;
+  onSave: (s: Partial<Shipping>) => void;
+  onCancel: () => void;
+}) {
+  const [form, setForm] = useState({
+    neighborhood: shipping?.neighborhood || "",
+    rate: shipping?.rate || 0,
+  });
+  const [rateInput, setRateInput] = useState(
+    shipping ? shipping.rate.toFixed(2).replace(".", ",") : "0,00"
+  );
+
+  useEffect(() => {
+    setForm({
+      neighborhood: shipping?.neighborhood || "",
+      rate: shipping?.rate || 0,
+    });
+    setRateInput(
+      shipping ? shipping.rate.toFixed(2).replace(".", ",") : "0,00"
+    );
+  }, [shipping]);
+
+  const handleRateInput = (raw: string) => {
+    if (!raw || raw === "0" || raw === "0,00") {
+      setRateInput("0,00");
+      setForm((prev) => ({ ...prev, rate: 0 }));
+      return;
+    }
+
+    const digits = raw.replace(/\D/g, "");
+    if (digits.length === 0) {
+      setRateInput("0,00");
+      setForm((prev) => ({ ...prev, rate: 0 }));
+      return;
+    }
+
+    const numericValue = parseInt(digits, 10);
+    const reais = Math.floor(numericValue / 100);
+    const centavos = numericValue % 100;
+
+    let formatted;
+    if (reais === 0) {
+      formatted = `0,${centavos.toString().padStart(2, "0")}`;
+    } else {
+      formatted = `${reais},${centavos.toString().padStart(2, "0")}`;
+    }
+
+    setRateInput(formatted);
+    setForm((prev) => ({
+      ...prev,
+      rate: parseFloat(formatted.replace(",", ".")),
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSave(form);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-2">
+        <label className="block text-sm font-semibold text-gray-800">
+          Bairro
+        </label>
+        <input
+          type="text"
+          value={form.neighborhood}
+          onChange={(e) => setForm({ ...form, neighborhood: e.target.value })}
+          placeholder="Ex: Centro"
+          required
+          className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-semibold text-gray-800">
+          Taxa (R$)
+        </label>
+        <input
+          type="text"
+          value={rateInput}
+          onChange={(e) => handleRateInput(e.target.value)}
+          placeholder="0,00"
+          required
+          className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors"
+        />
+      </div>
+
+      <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3 sm:pt-4 border-t">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={onCancel}
+          className="px-4 py-2 w-full sm:w-auto"
+        >
+          Cancelar
+        </Button>
+        <Button
+          type="submit"
+          className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-medium w-full sm:w-auto"
+        >
+          {shipping ? "Atualizar Taxa" : "Criar Taxa"}
         </Button>
       </div>
     </form>

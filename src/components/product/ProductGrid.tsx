@@ -1,4 +1,3 @@
-import { PRODUCTS } from "@/data/products";
 import ProductCard from "./ProductCard";
 import { ProductCardSkeleton } from "./ProductCardSkeleton";
 import { type Product } from "@/api";
@@ -10,8 +9,8 @@ interface ProductGridProps {
   isLoading?: boolean;
 }
 
-export default function ProductGrid({ searchTerm = "", category = "", products, isLoading = false }: ProductGridProps) {
-  const productList = products || PRODUCTS;
+export default function ProductGrid({ searchTerm = "", category = "", products = [], isLoading = false }: ProductGridProps) {
+  const productList = products;
 
   // Filtrar produtos baseado na pesquisa e categoria
   const filteredProducts = productList
