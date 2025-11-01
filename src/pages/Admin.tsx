@@ -13,10 +13,12 @@ import {
 import { type Product, type Category, type Shipping } from "@/types";
 import { fetchProducts, fetchShippingRates, createShippingRate, updateShippingRate, deleteShippingRate, API_BASE_URL } from "@/api";
 import { Plus, Edit, Trash2, Truck } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Admin() {
   const { isAuthenticated, token, logout } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [products, setProducts] = useState<Product[]>([]);
   const [shippingRates, setShippingRates] = useState<Shipping[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,8 +65,17 @@ export default function Admin() {
       });
       if (!response.ok) throw new Error("Failed to delete");
       setProducts(products.filter((p) => p._id !== id));
+      toast({
+        title: "Sucesso",
+        description: "Produto removido com sucesso! 🗑️",
+      });
     } catch (error) {
       console.error("Error deleting product:", error);
+      toast({
+        title: "Erro",
+        description: "Erro ao remover produto. ❌",
+        variant: "destructive",
+      });
     }
   };
 
@@ -86,8 +97,17 @@ export default function Admin() {
       await loadProducts();
       setIsDialogOpen(false);
       setEditingProduct(null);
+      toast({
+        title: "Sucesso",
+        description: editingProduct ? "Produto atualizado com sucesso! ✏️" : "Produto adicionado com sucesso! ➕",
+      });
     } catch (error) {
       console.error("Error saving product:", error);
+      toast({
+        title: "Erro",
+        description: "Erro ao salvar produto. ❌",
+        variant: "destructive",
+      });
     }
   };
 
@@ -96,8 +116,17 @@ export default function Admin() {
     try {
       await deleteShippingRate(id, token);
       setShippingRates(shippingRates.filter((s) => s._id !== id));
+      toast({
+        title: "Sucesso",
+        description: "Taxa de frete removida com sucesso! 🚚",
+      });
     } catch (error) {
       console.error("Error deleting shipping rate:", error);
+      toast({
+        title: "Erro",
+        description: "Erro ao remover taxa de frete. ❌",
+        variant: "destructive",
+      });
     }
   };
 
@@ -111,8 +140,17 @@ export default function Admin() {
       await loadShippingRates();
       setIsShippingDialogOpen(false);
       setEditingShipping(null);
+      toast({
+        title: "Sucesso",
+        description: editingShipping ? "Taxa de frete atualizada com sucesso! ✏️" : "Taxa de frete adicionada com sucesso! ➕",
+      });
     } catch (error) {
       console.error("Error saving shipping rate:", error);
+      toast({
+        title: "Erro",
+        description: "Erro ao salvar taxa de frete. ❌",
+        variant: "destructive",
+      });
     }
   };
 

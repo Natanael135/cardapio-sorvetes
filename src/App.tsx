@@ -2,6 +2,7 @@ import { Outlet, useLocation, ScrollRestoration } from "react-router-dom";
 import AppHeader from "./components/layout/AppHeader";
 import BottomNav from "./components/layout/BottomNav";
 import Footer from "./components/layout/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -16,6 +17,7 @@ export default function App() {
       </main>
 
       <BottomNav activePath={pathname} />
+      <Toaster />
     </div>
   );
 }
