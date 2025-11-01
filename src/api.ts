@@ -1,5 +1,10 @@
 import { type Product, type Shipping } from "@/types";
 
+interface User {
+  userId: string;
+  username: string;
+}
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'; // Fallback para desenvolvimento
 
 export { API_BASE_URL };
@@ -70,4 +75,16 @@ export const deleteShippingRate = async (id: string, token: string): Promise<voi
   if (!response.ok) {
     throw new Error('Failed to delete shipping rate');
   }
+};
+
+export const verifyToken = async (token: string): Promise<User> => {
+  const response = await fetch(`${API_BASE_URL}/auth/verify`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Token inválido');
+  }
+  return response.json();
 };

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { verifyToken } from '@/api';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -39,7 +40,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      setToken(storedToken);
+      // Validar o token com o backend
+      verifyToken(storedToken)
+        .then(() => {
+          setToken(storedToken);
+        })
+        .catch(() => {
+          // Token inválido, remover
+          localStorage.removeItem('token');
+          setToken(null);
+        });
     }
   }, []);
 
