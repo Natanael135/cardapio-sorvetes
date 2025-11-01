@@ -294,7 +294,7 @@ export default function Cart() {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-orange-50 py-12">
+      <div className="flex items-center justify-center py-6 px-4 bg-gradient-to-br from-yellow-50 to-orange-50">
         <div className="max-w-md mx-auto text-center space-y-6">
           <div className="text-6xl animate-bounce">🛒</div>
           <h2 className="text-2xl font-bold text-gray-800">Seu carrinho está vazio</h2>
@@ -303,7 +303,7 @@ export default function Cart() {
             to="/"
             className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold py-3 px-8 rounded-2xl transition-all duration-300 shadow-soft hover:shadow-lg"
           >
-            Ver Sorvetes
+            Ver Cardápio
           </Link>
         </div>
       </div>
