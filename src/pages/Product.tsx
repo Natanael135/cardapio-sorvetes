@@ -5,11 +5,13 @@ import { ArrowLeft, Flower } from "lucide-react";
 import { Link } from "react-router-dom";
 import AddToCartModal from "@/components/ui/AddToCartModal";
 import { fetchProduct, type Product, API_BASE_URL } from "@/api";
+import { useStore } from "@/contexts/StoreContext";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { isOpen } = useStore();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -111,8 +113,13 @@ export default function ProductPage() {
                         Indisponível
                       </span>
                     )}
+                    {product.available && !isOpen && (
+                      <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
+                        Loja Fechada
+                      </span>
+                    )}
                   </div>
-                  {product.available && <AddToCartModal product={product} />}
+                  {product.available && isOpen && <AddToCartModal product={product} />}
                 </div>
             </div>
           </div>
