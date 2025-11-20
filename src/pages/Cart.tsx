@@ -4,6 +4,7 @@ import { Trash2, Plus, Minus, User, Phone, MapPin, Truck, MessageSquare, Flower 
 import { z } from "zod";
 import { type Product } from "@/types";
 import { fetchShippingRates } from "@/api";
+import { useStore } from "@/contexts/StoreContext";
 
 interface CartItem {
   product: Product;
@@ -64,6 +65,7 @@ export default function Cart() {
     changeAmount: '0,00',
   });
   const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof DeliveryInfo, string>>>({});
+  const { isOpen } = useStore();
 
   useEffect(() => {
     const loadShippingRates = async () => {
@@ -623,15 +625,15 @@ export default function Cart() {
           </Link>
           <button
             onClick={handleFinalizeOrder}
-            disabled={!deliveryInfo.neighborhood || !deliveryInfo.name || !deliveryInfo.whatsapp || !deliveryInfo.address}
+            disabled={!deliveryInfo.neighborhood || !deliveryInfo.name || !deliveryInfo.whatsapp || !deliveryInfo.address || !isOpen}
             className={`flex items-center justify-center gap-2 py-4 px-6 rounded-2xl font-semibold transition-all duration-300 ${
-              deliveryInfo.neighborhood && deliveryInfo.name && deliveryInfo.whatsapp && deliveryInfo.address
+              deliveryInfo.neighborhood && deliveryInfo.name && deliveryInfo.whatsapp && deliveryInfo.address && isOpen
                 ? 'bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white shadow-soft hover:shadow-lg hover:scale-105 animate-pulse-slow'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
             <Flower className="h-5 w-5" />
-            Finalizar Pedido
+            {isOpen ? 'Finalizar Pedido' : 'Loja Fechada'}
           </button>
         </div>
       </div>

@@ -88,3 +88,26 @@ export const verifyToken = async (token: string): Promise<User> => {
   }
   return response.json();
 };
+
+export const fetchStoreStatus = async (): Promise<{ isOpen: boolean }> => {
+  const response = await fetch(`${API_BASE_URL}/store/status`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch store status');
+  }
+  return response.json();
+};
+
+export const updateStoreStatus = async (isOpen: boolean, token: string): Promise<{ isOpen: boolean }> => {
+  const response = await fetch(`${API_BASE_URL}/store/status`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ isOpen }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to update store status');
+  }
+  return response.json();
+};

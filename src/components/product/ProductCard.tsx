@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import AddToCartModal from "@/components/ui/AddToCartModal";
+import { useStore } from "@/contexts/StoreContext";
 
 
 export default function ProductCard({ product }: { product: Product }) {
   const [showModal, setShowModal] = useState(false);
+  const { isOpen } = useStore();
 
   return (
     <>
@@ -55,21 +57,21 @@ export default function ProductCard({ product }: { product: Product }) {
               </div>
               <Button
                 size="sm"
-                disabled={!product.available}
+                disabled={!product.available || !isOpen}
                 className={`w-full border-0 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] ${
-                  product.available
+                  product.available && isOpen
                     ? "bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white"
                     : "bg-gray-400 text-gray-200 cursor-not-allowed"
                 }`}
                 onClick={(e) => {
-                  if (!product.available) return;
+                  if (!product.available || !isOpen) return;
                   e.preventDefault();
                   e.stopPropagation();
                   setShowModal(true);
                 }}
               >
                 <Plus className="h-4 w-4 mr-1" />
-                {product.available ? "Adicionar" : "Indisponível"}
+                {product.available && isOpen ? "Adicionar" : !isOpen ? "Loja Fechada" : "Indisponível"}
               </Button>
             </div>
           </div>

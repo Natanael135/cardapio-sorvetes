@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import ProductGrid from "@/components/product/ProductGrid";
 import { Flower } from "lucide-react";
 import { fetchProducts, type Product } from "@/api";
+import { useStore } from "@/contexts/StoreContext";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { isOpen } = useStore();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -30,6 +32,13 @@ export default function Home() {
         <h2 className="text-2xl font-bold text-orange-800 mb-2">Bem-vindo ao Geladinho Gourmet da Faby!</h2>
         <p className="text-base text-orange-700 font-medium">Deliciosos Geladinhos feitos com Amor, Alegria e Gratidão, como um campo de girassóis</p>
       </div>
+
+      {!isOpen && (
+        <div className="rounded-2xl bg-gradient-to-r from-red-200 via-red-300 to-red-400 p-6 text-center shadow-lg">
+          <h3 className="text-xl font-bold text-red-800 mb-2">Loja Fechada</h3>
+          <p className="text-red-700 font-medium">A loja está temporariamente fechada. Não é possível fazer pedidos no momento.</p>
+        </div>
+      )}
 
       <div className="flex flex-row flex-wrap items-center gap-3">
         <input

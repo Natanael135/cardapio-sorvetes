@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useStore } from "@/contexts/StoreContext";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,12 +12,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { type Product, type Category, type Shipping } from "@/types";
-import { fetchProducts, fetchShippingRates, createShippingRate, updateShippingRate, deleteShippingRate, API_BASE_URL } from "@/api";
+import { fetchProducts, fetchShippingRates, createShippingRate, updateShippingRate, deleteShippingRate, API_BASE_URL, updateStoreStatus } from "@/api";
 import { Plus, Edit, Trash2, Truck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Admin() {
   const { isAuthenticated, token, logout } = useAuth();
+  const { isOpen, refreshStatus } = useStore();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [products, setProducts] = useState<Product[]>([]);
@@ -53,6 +55,24 @@ export default function Admin() {
       setShippingRates(data);
     } catch (error) {
       console.error("Error fetching shipping rates:", error);
+    }
+  };
+
+  const handleToggleStore = async () => {
+    try {
+      await updateStoreStatus(!isOpen, token!);
+      await refreshStatus();
+      toast({
+        title: "Sucesso",
+        description: `Loja ${!isOpen ? 'aberta' : 'fechada'} com sucesso!`,
+      });
+    } catch (error) {
+      console.error("Error updating store status:", error);
+      toast({
+        title: "Erro",
+        description: "Erro ao alterar status da loja.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -164,6 +184,15 @@ export default function Admin() {
             Admin - Gerenciar Produtos
           </h1>
           <div className="flex flex-col sm:flex-row gap-2 sm:space-x-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium">Loja:</span>
+              <Button
+                onClick={handleToggleStore}
+                className={isOpen ? "bg-red-500 hover:bg-red-600 text-white" : "bg-green-500 hover:bg-green-600 text-white"}
+              >
+                {isOpen ? "Fechar Loja" : "Abrir Loja"}
+              </Button>
+            </div>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button
