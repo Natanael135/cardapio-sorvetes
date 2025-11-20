@@ -185,7 +185,7 @@ export default function Admin() {
           </h1>
           <div className="flex flex-col sm:flex-row gap-2 sm:space-x-4">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">Loja:</span>
+              <span className="text-sm font-medium">{isOpen ? "Loja Aberta:" : "Loja Fechada:"}</span>
               <Button
                 onClick={handleToggleStore}
                 className={isOpen ? "bg-red-500 hover:bg-red-600 text-white" : "bg-green-500 hover:bg-green-600 text-white"}
